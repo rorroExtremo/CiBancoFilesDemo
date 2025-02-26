@@ -1,0 +1,89 @@
+
+<pre>
+    {{pdf$| async | json}}
+</pre>
+
+<button (click)="getPdfAngular()" class="btn btn-warning me-1">Get PDF from Angular</button>
+<button mat-button (click)="exporter.exportTable('csv')">Exportar Excel</button> 
+<button mat-button (click)="exporter.exportTable('txt')" class="btn btn-warning me-1">Exportar TXT</button>
+<button mat-button (click)="exporter.exportTable('xlsx')" class="btn btn-warning me-1">Exportar Excel</button>
+<br>
+<button (click)="getPdfSpring()" class="btn btn-primary me-1">Get PDF from Spring</button>
+
+<a href="http://127.0.0.1/file-manager/controller/getFile?reportName=usuarios&reportExtension=pdf" class="btn btn-primary me-1">Reporte Usuarios PDF</a>
+<a href="http://127.0.0.1/file-manager/controller/getFile?reportName=usuarios&reportExtension=txt" class="btn btn-primary me-1">Reporte Usuarios TXT</a>
+<a href="http://127.0.0.1/file-manager/controller/getFile?reportName=usuarios&reportExtension=xlsx" class="btn btn-primary me-1">Reporte Usuarios Excel</a>
+
+
+<!-- <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Perfil</th>
+            <th>Grupo</th>
+            <th>Nombre</th>
+            <th>Status</th>
+            <th>Alta</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{user.usuario}}</td>
+            <td>{{user.perfil}}</td>
+            <td>{{user.grupo}}</td>
+            <td>{{user.nombre}}</td>
+            <td>{{user.status}}</td>
+            <td>{{user.alta}}</td>
+        </tr>
+    </tbody>
+</table> -->
+
+<br>
+<br>
+<mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="usuario">
+      <th mat-header-cell *matHeaderCellDef> Usuario </th>
+      <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="perfil">
+      <th mat-header-cell *matHeaderCellDef> Perfil </th>
+      <td mat-cell *matCellDef="let element"> {{element.perfil}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="grupo">
+      <th mat-header-cell *matHeaderCellDef> Grupo </th>
+      <td mat-cell *matCellDef="let element"> {{element.grupo}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+      
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="alta">
+        <th mat-header-cell *matHeaderCellDef> Alta </th>
+        <td mat-cell *matCellDef="let element"> {{element.alta}} </td>
+      </ng-container>
+      
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </mat-table>
+  
+  
